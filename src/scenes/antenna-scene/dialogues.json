@@ -1,0 +1,51 @@
+{
+    "0": [
+            {
+                "display": "*radio interferences*\n\n- Captain Moore? Here earth station trying to stablish connection...",
+                "conditions": [{ "flag" : "isRadioAnswered", "value": "false" }],
+                "actions": [
+                    {
+                        "display": "Answer the radio",                        
+                        "conditions": [],
+                        "next": "1",
+                        "set": [{ "flag" : "isRadioAnswered", "value": "true" }]
+                    },
+                    {
+                        "display": "Fill oxygen tank",
+                        "conditions": [],
+                        "next": "2",
+                        "set": []
+                    }
+                    
+                ]
+            },
+            {
+                "display": "The antenna station is quiet, thats not normal, I think the radio just get broken...",
+                "conditions": [{ "flag" : "isRadioAnswered", "value": "true" }],
+                "actions": []
+            }
+        ],
+    "1": [
+        {
+            "display": "*radio interferences*\n\n- We got updates from the weather station, a sand storm is coming tonight. Are you ready for that?",
+            "conditions": [],
+            "actions": [
+                {
+                    "display": "Thanks! I'll close the solar panels until is gone.",
+                    "conditions": [],
+                    "enableCondition": "isRadioAnswered",
+                    "next": "0",
+                    "set": []
+                }
+            ]
+        }
+    ],
+
+    "2": [
+        {
+            "display": "The oxygen tanks are full now",
+            "conditions": [],
+            "actions": []
+        }
+    ]
+}
