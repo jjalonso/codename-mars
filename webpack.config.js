@@ -16,7 +16,9 @@ module.exports = {
     devtool: '#cheap-source-map',
 
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            title: 'codename-mars'
+        })
     ],
 
     module: {
@@ -25,6 +27,8 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
+                // TODO: Port it to new babel env loaders
+
             },
             {   
                 test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/, 
