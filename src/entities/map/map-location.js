@@ -8,7 +8,7 @@ class MapLocation extends Phaser.GameObjects.Image {
         this._nextScene = nextScene;
 
         this.setName(texture);
-        !this._isIntersection && this._bindEvents();
+        this._bindEvents();
     }
 
     _bindEvents() {

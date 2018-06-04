@@ -7,13 +7,6 @@ class AntennaScene extends RoomScene {
         super('AntennaScene', antennaDialogues);
     }
 
-    create() {
-        super.create();
-
-        
-
-        // this._dialogManager.executeAction(0);
-    }
 }
 
 export default AntennaScene;
