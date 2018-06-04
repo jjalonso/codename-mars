@@ -1,5 +1,4 @@
 import { introBg } from '../assets/intro-scene';
-import { gameState } from '../entities/state';
 import NavScene from './nav-scene'
 
 class IntroScene extends Phaser.Scene {

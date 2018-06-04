@@ -1,38 +1,34 @@
+import Phaser from 'phaser';
 
-class MapLocation {
+class MapLocation extends Phaser.GameObjects.Image {
 
-    constructor(id, image, walkingPosX, walkingPosY, scene, hoverColor=0xff0000) {
-        // TODO: Create custom objects instead
-        // https://labs.phaser.io/edit.html?src=src\plugins\custom%20game%20object.js
-        this._id = id;
-        this._image = image;
-        this._scene = scene;
-        this._walkingPosition = [walkingPosX, walkingPosY]
-        this._hoverColor = hoverColor;
+    constructor(scene, walkingX, walkingY, nextScene, x, y, texture) {
+        super(scene, x, y, texture);
+        this._walkingPosition = [walkingX, walkingY]
+        this._nextScene = nextScene;
+
+        this.setName(texture);
+        !this._isIntersection && this._bindEvents();
     }
 
-    get isIntersection() {
-        return this._image == null; 
+    _bindEvents() {
+        this
+            .setInteractive()
+            .on('pointerdown', () => this.scene.walkTo(this)) // TODO: Should I pass only position?
+            .on('pointerover', () => this._setHover(true))
+            .on('pointerout', () => this._setHover(false));
     }
 
-    get id() {
-        return this._id;
-    }
-
-    get image() {
-        return this._image;
-    }
-
-    get scene() {
-        return this._scene;
+    get nextScene() {
+        return this._nextScene;
     }
 
     get walkingPosition() {
         return this._walkingPosition;
     }
 
-    setHover(value) {
-        value ? this._image.setTint(this._hoverColor) : this._image.clearTint()
+    _setHover(value) {
+        value ? this.setTint(0xff0000) : this.clearTint()
     }
 
 }

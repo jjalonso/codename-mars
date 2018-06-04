@@ -1,5 +1,5 @@
-import { MapScene, MapLocation} from '../entities/Map';
-import { terrain, sky, mapCharacter, station, module, antenna } from '../assets/map-scene';
+import { MapScene, MapLocation, MapWaypoint } from '../entities/Map';
+import { terrain, sky, mapActor, station, module, antenna } from '../assets/map-scene';
 
 class NavScene extends MapScene {
 
@@ -14,12 +14,12 @@ class NavScene extends MapScene {
         this.load.image('station', station);
         this.load.image('module', module);
         this.load.image('antenna', antenna);
-        this.load.spritesheet('mapCharacter', mapCharacter, { frameWidth: 8, frameHeight: 16 });
+        this.load.spritesheet('mapActor', mapActor, { frameWidth: 8, frameHeight: 16 });
     }
 
     create() {
 
-        // TODO: LEARN HOW WORK THE SCENES WHEN CHANGED, IT LOOK LIKE ARE PAUSED AND NOT DESTROYED.
+        // TODO: LEARN HOW SCENES WORKS WHEN CHANGED, IT LOOK LIKE ARE PAUSED AND NOT DESTROYED.
 
         const camera = this.cameras.main;
         this.sky = this.add.image(camera.width / 2, camera.height / 2, 'sky');
@@ -27,39 +27,34 @@ class NavScene extends MapScene {
 
         this.anims.create({
             key: 'walk',
-            frames: this.anims.generateFrameNumbers('mapCharacter', { start: 0, end: 1 }),
+            frames: this.anims.generateFrameNumbers('mapActor', { start: 0, end: 1 }),
             frameRate: 5,
             repeat: -1
         });
         
-        // Add images to scene
-        let characterImage = this.add.sprite(0, 0, 'mapCharacter');
-        let stationImage = this.add.image(560, 230, 'station');
-        let antennaImage = this.add.image(633, 345, 'antenna').setScale(0.3);
-        let moduleImage = this.add.image(280, 400, 'module')
+        let mapActorImage = this.add.sprite(0, 0, 'mapActor');
 
-        // Create locations
-        let stationLocation = new MapLocation('station', stationImage, 530, 270, 'IntroScene');
-        let antennaLocation = new MapLocation('antenna', antennaImage, 625, 360, 'AntennaScene');
-        let moduleLocation = new MapLocation('module', moduleImage, 300, 420, 'IntroScene');
+        let moduleLocation = new MapLocation(this, 300, 420, 'ModuleScene', 280, 400, 'module');
+        let stationLocation = new MapLocation(this, 530, 270, 'StationScene', 560, 230, 'station');
+        let antennaLocation = new MapLocation(this, 625, 360, 'AntennaScene', 633, 345, 'antenna').setScale(0.3);
         
-        // Dummy Locations (For navigation purpose)
-        let intersectionLocation = new MapLocation('intersection', null, 470, 320);
-        let antennaEntranceLocation = new MapLocation('antennaEntrance', null, 610, 400);
+        // Map waypoints
+        let middleWaypoint = new MapWaypoint(this, 470, 320);
+        let antennaWaypoint = new MapWaypoint(this, 610, 400);
 
         // Build navigation
-        this.addLocation(stationLocation);
-        this.addLocation(antennaLocation);
-        this.addLocation(moduleLocation);
-        this.addLocation(intersectionLocation);
-        this.addLocation(antennaEntranceLocation);
+        this.addToMap(stationLocation);
+        this.addToMap(antennaLocation);
+        this.addToMap(moduleLocation);
+        this.addToMap(middleWaypoint);
+        this.addToMap(antennaWaypoint);
 
-        this.addLocationLink(moduleLocation, intersectionLocation);
-        this.addLocationLink(intersectionLocation, stationLocation);        
-        this.addLocationLink(intersectionLocation, antennaEntranceLocation);
-        this.addLocationLink(antennaEntranceLocation, antennaLocation);
-
-        this.setCharacter(characterImage, moduleLocation);
+        this.addLink(moduleLocation, middleWaypoint);
+        this.addLink(middleWaypoint, stationLocation);
+        this.addLink(middleWaypoint, antennaWaypoint);
+        this.addLink(antennaWaypoint, antennaLocation);
+    
+        this.setActor(mapActorImage, moduleLocation);
     }
 
 }

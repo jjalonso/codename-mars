@@ -20,41 +20,37 @@ class MapScene extends Phaser.Scene {
         this._pathFinder = ngraphPath.aStar(this._graph);
     }
 
-    addLocation(location) {
-        this._graph.addNode(location.id, location);
-        if (!location.isIntersection) {
-            location.image
-                .setInteractive()
-                .on('pointerdown', () => this._walkTo(location))
-                .on('pointerover', () => location.setHover(true))
-                .on('pointerout', () => location.setHover(false));
+    addToMap(instance) {
+        if (instance instanceof Phaser.GameObjects.GameObject) {
+            this.children.add(instance); 
         }
+        this._graph.addNode(instance.name, instance);
     }
 
-    addLocationLink(fromLocation, toLocation) {
-        if (!this._graph.hasNode(fromLocation.id) || !this._graph.hasNode(toLocation.id)) {
+    addLink(from, to) {
+        if (!this._graph.hasNode(from.name) || !this._graph.hasNode(to.name)) {
             throw 'Location not found. Did you added it?'
         }
-        this._graph.addLink(fromLocation.id, toLocation.id);
+        this._graph.addLink(from.name, to.name);
     }
 
-    setCharacter(sprite, location) {
+    setActor(sprite, location) {
         this._character = sprite;
         this._character.setPosition(...location.walkingPosition);
         this._currentCharLocation = location;
     }
 
-    _calcWalkingTime(fromLocation, toLocation) {
-        let [x, y] = toLocation.walkingPosition;
-        let [fromLocationX, fromLocationY] = fromLocation.walkingPosition;        
-        return Phaser.Math.Distance.Between(fromLocationX, fromLocationY, x, y) * this._walkingSpeed ;
+    _calcWalkingTime(from, to) {
+        let [x, y] = to.walkingPosition;
+        let [fromX, fromY] = from.walkingPosition;        
+        return Phaser.Math.Distance.Between(fromX, fromY, x, y) * this._walkingSpeed ;
     }
 
-    _onTravelCompleted(location) {
+    _enterNextScene(location) {
         this._character.anims.stop('walk');
         this._isCharacterMoving = false;
 
-        let locationScene = location.scene;
+        let locationScene = location.nextScene;
         this.scene.start(locationScene);
     }
 
@@ -85,15 +81,15 @@ class MapScene extends Phaser.Scene {
         });
     }
 
-    _walkTo(location) {
+    walkTo(location) {
         if (this._isCharacterMoving) return;
 
         this._isCharacterMoving = true;
-        let path = this._pathFinder.find(this._currentCharLocation.id, location.id).reverse();
+        let path = this._pathFinder.find(this._currentCharLocation.name, location.name).reverse();
 
         let tween = this.tweens.timeline({
             targets: [ this._character ],
-            onComplete: () => this._onTravelCompleted(location),
+            onComplete: () => this._enterNextScene(location),
             onStart: () => this._onTravelStarted(),
             tweens: this._buildCharacterTweens(path)
         });

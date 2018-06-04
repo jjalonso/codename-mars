@@ -10,6 +10,8 @@ let config = {
     width: 1280,
     height: 720,
     scene: [IntroScene, NavScene, AntennaScene]
+        // scene: [NavScene]
+
     // scene: [AntennaScene]
 
 };
