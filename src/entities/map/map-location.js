@@ -14,7 +14,7 @@ class MapLocation extends Phaser.GameObjects.Image {
     _bindEvents() {
         this
             .setInteractive()
-            .on('pointerdown', () => this.scene.walkTo(this)) // TODO: Should I pass only position?
+            .on('pointerdown', () => this.scene.walkTo(this))
             .on('pointerover', () => this._setHover(true))
             .on('pointerout', () => this._setHover(false));
     }

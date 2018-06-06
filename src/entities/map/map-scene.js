@@ -81,6 +81,7 @@ class MapScene extends Phaser.Scene {
         });
     }
 
+    // TODO: I should pass only position for less dependency between 
     walkTo(location) {
         if (this._isCharacterMoving) return;
 

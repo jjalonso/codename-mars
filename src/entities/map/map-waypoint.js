@@ -1,4 +1,3 @@
-import Phaser from 'phaser';
 
 class MapWaypoint {
 
@@ -6,7 +5,7 @@ class MapWaypoint {
         this._walkingPosition = [x, y]
 
         this._name = (this._genUUID());
-        // TODO: Add to scene a point if DEBUG enabled.
+        // TODO: Add to scene a point if DEBUG enabled or inherit from a GameObject.
     }
 
     _genUUID() {
