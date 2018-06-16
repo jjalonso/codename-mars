@@ -1,0 +1,40 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "map-actor",
+        "url": "map-actor.png",
+        "type": "spritesheet",
+        "frameConfig": {
+          "frameWidth": 8,
+          "frameHeight": 16
+        }
+      },
+      {
+        "key": "sky",
+        "url": "sky.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain",
+        "url": "terrain.png",
+        "type": "image"
+      },
+      {
+        "key": "antenna",
+        "url": "antenna.png",
+        "type": "image"
+      },
+      {
+        "key": "module",
+        "url": "module.png",
+        "type": "image"
+      },
+      {
+        "key": "station",
+        "url": "station.png",
+        "type": "image"
+      }
+    ]
+  }
+}

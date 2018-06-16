@@ -2,46 +2,50 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 
 module.exports = {
-    entry: {
-        main: path.resolve('./src/main.js')
-    },
+  entry: {
+    main: path.resolve('./src/main.js')
+  },
 
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve('./dist')
-    },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve('./dist')
+  },
 
-    devtool: '#cheap-source-map',
+  devtool: '#cheap-source-map',
 
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'codename-mars'
-        })
-    ],
-
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: 'babel-loader'
-                // TODO: Port it to new babel env loaders
-
-            },
-            {   
-                test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/, 
-                use: [
-                    {
-                        loader: 'file-loader',
-                        query: {
-                            name: '[name].[ext]',
-                            outputPath: 'assets/'
-                        }            
-                    }
-                ]    
-            }
+  plugins: [
+    new HtmlWebpackPlugin({ title: 'codename-mars' }),
+    new CopyWebpackPlugin([{
+      from: '**/*/assets/*',
+      to: 'assets',
+      flatten: true
+    }]),
+    new MergeJsonWebpackPlugin({
+      "output": {
+        "groupBy": [
+          {
+            "pattern": "src/scenes/**/pack.json",
+            "fileName": "assets/pack.json"
+          }
         ]
-    }
+      },
+    })
+
+    // )
+  ],
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+        // TODO: Port it to new babel env loaders
+      }
+    ]
+  }
 };

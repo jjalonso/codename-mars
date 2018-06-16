@@ -1,11 +1,11 @@
-import { RoomScene } from '../../entities/room'
+import { RoomScene } from '../../components/scenes/room';
 import antennaDialogues from './dialogues.json';
 
 class AntennaScene extends RoomScene {
 
-    constructor() {
-        super('AntennaScene', antennaDialogues);
-    }
+  constructor() {
+    super('antenna-scene', antennaDialogues);
+  }
 
 }
 

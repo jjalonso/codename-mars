@@ -1,0 +1,11 @@
+{
+  "loader-scene": {
+    "files": [
+      {
+        "key": "intro-bg",
+        "url": "./assets/intro-bg.png",
+        "type": "image"
+      }
+    ]
+  }
+}

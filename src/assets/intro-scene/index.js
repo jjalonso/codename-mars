@@ -1,1 +1,0 @@
-export { default as introBg } from './intro-bg.png';
