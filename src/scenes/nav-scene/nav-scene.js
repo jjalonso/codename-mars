@@ -1,6 +1,7 @@
 import { Map, MapLocation, MapWaypoint } from '../../components/map';
+import { GameScene } from '../../components/scenes/game-scene';
 
-class NavScene extends Phaser.Scene {
+class NavScene extends GameScene {
 
   constructor() {
     super('nav-scene');
@@ -8,6 +9,7 @@ class NavScene extends Phaser.Scene {
 
   create() {
     const camera = this.cameras.main;
+
     let sky = this.add.image(camera.width / 2, camera.height / 2, 'sky');
     let terrain = this.add.image(camera.width / 2, camera.height / 2, 'terrain');
 

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { AntennaScene } from './scenes/antenna-scene';
+import { IntroScene } from './scenes/intro-scene';
 import { LoaderScene } from './scenes/loader-scene';
 import { NavScene } from './scenes/nav-scene';
 
@@ -10,7 +11,7 @@ let config = {
   loader: {
     path: 'assets/'
   },
-  scene: [LoaderScene, NavScene, AntennaScene]
+  scene: [LoaderScene, IntroScene, NavScene, AntennaScene]
 };
 
 let game = new Phaser.Game(config);
