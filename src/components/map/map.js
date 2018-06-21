@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 
 class Map extends Phaser.GameObjects.Container {
 
-  constructor(scene, image, x, y, children) {
+  constructor(scene, images, x, y, children) {
     super(scene, x, y, children);
     this.character = null;
     this._graph = null;
@@ -13,7 +13,7 @@ class Map extends Phaser.GameObjects.Container {
     this._isCharacterMoving = false;
     this._walkingSpeed = 16;
 
-    this._setImage(image);
+    this._setImages(images);
     this._initGraph();
   }
 
@@ -22,11 +22,13 @@ class Map extends Phaser.GameObjects.Container {
     this._pathFinder = ngraphPath.aStar(this._graph);
   }
 
-  add(child) {
+  add(child, isOverActor = true) {
     if (child instanceof Phaser.GameObjects.GameObject) {
-      super.add(child);
+      let index = isOverActor ? -3 : -1;
+      this.addAt(child, index);
     }
     this._graph.addNode(child.name, child);
+    console.log(this._graph)
   }
 
   addLink(from, to) {
@@ -36,13 +38,13 @@ class Map extends Phaser.GameObjects.Container {
     this._graph.addLink(from.name, to.name);
   }
 
-  _setImage(image) {
-    this.addAt(image, -9999)
+  _setImages(images) {
+    images.forEach(image => this.addAt(image, -4));
   }
 
   setActor(sprite, location) {
     this._character && this.remove(this._character)
-    super.add(sprite);
+    this.addAt(sprite, -2);
     this._character = sprite;
     this._character.setPosition(...location.walkingPosition);
     this._currentCharLocation = location;
@@ -55,8 +57,8 @@ class Map extends Phaser.GameObjects.Container {
   }
 
   _enterNextScene(location) {
-    this._character.anims.stop('walk');
     this._isCharacterMoving = false;
+    this._character.anims.stop('walk');
 
     let locationScene = location.nextScene;
     this.scene.scene.start(locationScene);

@@ -11,8 +11,53 @@
         }
       },
       {
-        "key": "sky",
-        "url": "sky.png",
+        "key": "terrain-01",
+        "url": "terrain-01.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-01",
+        "url": "terrain-01.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-02",
+        "url": "terrain-02.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-03",
+        "url": "terrain-03.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-04",
+        "url": "terrain-04.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-05",
+        "url": "terrain-05.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-06",
+        "url": "terrain-06.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-07",
+        "url": "terrain-07.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-08",
+        "url": "terrain-08.png",
+        "type": "image"
+      },
+      {
+        "key": "terrain-09",
+        "url": "terrain-09.png",
         "type": "image"
       },
       {
