@@ -1,18 +1,21 @@
 
-## Getting started
+## CI Deployment (Master branch): 
+### https://codename-mars.herokuapp.com/
+
+---
+
+### Getting started
 
 You can start in two ways:
 
-## How to build the application?
+### How to build the application?
 
 ```
 $ npm install
 $ npm run build
 ```
 
-Your source will be minified.
-
-## How to develop the application?
+### How to develop the application?
 
 ```
 $ npm install
