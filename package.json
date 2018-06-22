@@ -10,7 +10,8 @@
     "clear": "rm -rf dist/",
     "count": "find src -name '*.js' | xargs wc -l | sort -r",
     "build": "npm run clear && webpack -p",
-    "start": "echo $PORT && webpack-dev-server --port $PORT --watch-poll --content-base dist/",
+    "dev": "webpack-dev-server --port $PORT --watch-poll --content-base dist/",
+    "start": "npm run build && http-server ./dist -p $PORT",
     "tunnel": "ngrok http --host-header=rewrite 8086"
   },
   "devDependencies": {
