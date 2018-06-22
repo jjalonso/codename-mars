@@ -3,6 +3,8 @@ import { AntennaScene } from './scenes/antenna-scene';
 import { IntroScene } from './scenes/intro-scene';
 import { LoaderScene } from './scenes/loader-scene';
 import { NavScene } from './scenes/nav-scene';
+import { PauseScene } from './scenes/pause-scene';
+
 
 let config = {
   type: Phaser.AUTO,
@@ -11,7 +13,7 @@ let config = {
   loader: {
     path: 'assets/'
   },
-  scene: [LoaderScene, IntroScene, NavScene, AntennaScene]
+  scene: [LoaderScene, IntroScene, PauseScene, NavScene, AntennaScene]
 };
 
 let game = new Phaser.Game(config);

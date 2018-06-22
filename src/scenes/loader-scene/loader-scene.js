@@ -1,7 +1,7 @@
-import { GameScene } from '../../components/scenes/game-scene';
+import { FadeableScene } from '../../components/scenes/fadeable-scene';
 import { ProgressBar } from '../../components/ui/progress-bar';
 
-class LoaderScene extends GameScene {
+class LoaderScene extends FadeableScene {
 
   constructor() {
     super('loader-scene');

@@ -1,6 +1,6 @@
-import { GameScene } from '../../components/scenes/game-scene';
+import { FadeableScene } from '../../components/scenes/fadeable-scene';
 
-class IntroScene extends GameScene {
+class IntroScene extends FadeableScene {
 
   constructor() {
     super('intro-scene');

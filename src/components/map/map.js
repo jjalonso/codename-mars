@@ -28,7 +28,6 @@ class Map extends Phaser.GameObjects.Container {
       this.addAt(child, index);
     }
     this._graph.addNode(child.name, child);
-    console.log(this._graph)
   }
 
   addLink(from, to) {

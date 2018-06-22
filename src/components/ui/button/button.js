@@ -2,20 +2,27 @@ import Phaser from 'phaser';
 
 class Button extends Phaser.GameObjects.Container {
 
-  constructor(scene, text, x, y, width, height) {
+  constructor(scene, str, x, y, width, height, cb) {
     super(scene, x, y);
-    this._width = width;
-    this._height = height;
 
-    this._create(text);
+    this._create(str, width, height, cb);
   }
 
-  _create(text) {
-    this._box = this.scene.add.graphics();
-    this._text = this.scene.add.text(text, 0, 0)
-    this.add([this._box, this._text]);
-    this._box.fillStyle(0x222222, 0.8);
-    this._box.fillRect(-(this._width / 2), -(this._height / 2), this._width, this._height);
+  _create(str, width, height, cb) {
+    let x = -(width / 2);
+    const y = -(height / 2);
+
+    const text = this.scene.add.text(0, 0, str).setOrigin(0.5);
+    const box = this.scene.add.graphics()
+      .fillStyle(0xffffff, 0.3)
+      .fillRect(x, y, width, height)
+      .on('pointerdown', () => cb())
+      .setInteractive(
+        new Phaser.Geom.Rectangle(x, y, width, height),
+        Phaser.Geom.Rectangle.Contains
+      )
+
+    this.add([box, text]);
   }
 
 }

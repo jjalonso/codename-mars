@@ -1,9 +1,10 @@
 import { Map, MapLocation, MapWaypoint } from '../../components/map';
-import { GameScene } from '../../components/scenes/game-scene';
-class NavScene extends GameScene {
+import { PausableScene } from '../../components/scenes/pausable-scene';
+
+class NavScene extends PausableScene {
 
   constructor() {
-    super('nav-scene');
+    super('nav-scene', 'pause-scene');
     this._scrollMarginPercent = 0.05;
     this._map = null;
   }
@@ -68,7 +69,6 @@ class NavScene extends GameScene {
   }
 
   _setupCameraBounds(camera, map, padding) {
-    console.log(map.getBounds().width, map.getBounds().width + padding)
     camera.setBounds(
       map.x - padding,
       map.y - padding,
@@ -86,9 +86,8 @@ class NavScene extends GameScene {
     })
   };
 
-  _calcScrollSpeed(a, b) {
-    console.log(Phaser.Math.Difference(a, b))
-    return Phaser.Math.Difference(a, b) * 500;
+  _calcScrollSpeed(axis, b) {
+    return Phaser.Math.Difference(axis, b) * 320;
   }
 
   _updateScroll() {
@@ -105,7 +104,9 @@ class NavScene extends GameScene {
   }
 
   update() {
-    if (!this.cameras.main) { return } // https://github.com/photonstorm/phaser/issues/3776
+    // https://github.com/photonstorm/phaser/issues/3776
+    if (!this.cameras.main) { return }
+
     this._updateScroll()
     // console.log('World Position', this.cameras.main.getWorldPoint(this.input.x, this.input.y));
 

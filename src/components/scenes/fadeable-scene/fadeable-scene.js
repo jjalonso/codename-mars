@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-class GameScene extends Phaser.Scene {
+class FadeableScene extends Phaser.Scene {
 
   constructor(sceneId) {
     super(sceneId);
@@ -13,6 +13,12 @@ class GameScene extends Phaser.Scene {
       camera.fadeFrom(data.fadeInTime, 0, 0, 0, true);
     }
   }
+
+  // fadeInRun(sceneId, data, time = this._fadeTime) {
+  //   // TODO: embebed it inside others with flag parameter
+  //   data = Object.assign(data || {}, { fadeInTime: time });
+  //   this.scene.run(sceneId, data);
+  // }
 
   fadeInStart(sceneId, data, time = this._fadeTime) {
     data = Object.assign(data || {}, { fadeInTime: time });
@@ -31,5 +37,5 @@ class GameScene extends Phaser.Scene {
 
 }
 
-export default GameScene;
+export default FadeableScene;
 
