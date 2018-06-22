@@ -16,6 +16,6 @@ Your source will be minified.
 
 ```
 $ npm install
-$ npm run dev
+$ npm run start
 ```
 
