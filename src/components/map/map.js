@@ -62,8 +62,9 @@ class Map extends Phaser.GameObjects.Container {
     this._isCharacterMoving = false;
     this._character.anims.stop('walk');
 
-    let locationScene = location.nextScene;
-    this.scene.scene.start(locationScene);
+    let locationSceneId = location.nextScene;
+    this.scene.fadeOutInStart(locationSceneId)
+    // this.scene.scene.start(locationScene);
   }
 
   _onTravelStarted() {
