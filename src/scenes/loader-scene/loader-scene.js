@@ -25,8 +25,7 @@ class LoaderScene extends FadeableScene {
     this.load.pack('assets', 'pack.json');
 
     this.load.on('complete', () => {
-      this.scene.start('station-scene')
-      // this.fadeInStart('intro-scene');
+      this.fadeInStart('intro-scene');
     })
 
   };
