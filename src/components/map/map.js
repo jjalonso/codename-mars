@@ -90,8 +90,12 @@ class Map extends Phaser.GameObjects.Container {
     });
   }
 
+  locationClicked(location) {
+    this._walkTo(location);
+  }
+
   // TODO: Should I pass only position for less dependency between 
-  walkTo(location) {
+  _walkTo(location) {
     if (this._isCharacterMoving) return;
 
     this._isCharacterMoving = true;

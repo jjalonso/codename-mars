@@ -28,7 +28,7 @@ module.exports = {
       "output": {
         "groupBy": [
           {
-            "pattern": "src/scenes/**/pack.json",
+            "pattern": "src/**/pack.json",
             "fileName": "assets/pack.json"
           }
         ]

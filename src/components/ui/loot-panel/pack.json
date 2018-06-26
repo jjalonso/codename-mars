@@ -1,0 +1,11 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "box-cell",
+        "url": "box-cell.png",
+        "type": "image"
+      }
+    ]
+  }
+}

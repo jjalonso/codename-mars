@@ -1,0 +1,16 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "item1",
+        "url": "item1.png",
+        "type": "image"
+      },
+      {
+        "key": "item2",
+        "url": "item2.png",
+        "type": "image"
+      }
+    ]
+  }
+}

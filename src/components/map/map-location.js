@@ -15,7 +15,7 @@ class MapLocation extends Phaser.GameObjects.Image {
   _bindEvents() {
     this
       .setInteractive()
-      .on('pointerdown', () => this._map.walkTo(this))
+      .on('pointerdown', () => this._map.locationClicked(this))
       .on('pointerover', () => this._setHover(true))
       .on('pointerout', () => this._setHover(false));
   }
@@ -29,7 +29,7 @@ class MapLocation extends Phaser.GameObjects.Image {
   }
 
   _setHover(value) {
-    value ? this.setTint(0xff0000) : this.clearTint()
+    value ? this.setTint(0xf4df42) : this.clearTint()
   }
 
 }

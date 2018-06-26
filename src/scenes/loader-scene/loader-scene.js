@@ -21,11 +21,12 @@ class LoaderScene extends FadeableScene {
       this._progressBar.setProgress(value);
     });
 
-    // Load all game assets
+    // TODO: Load only "boot" property in JSON
     this.load.pack('assets', 'pack.json');
 
     this.load.on('complete', () => {
-      this.fadeInStart('intro-scene');
+      this.scene.start('station-scene')
+      // this.fadeInStart('intro-scene');
     })
 
   };
