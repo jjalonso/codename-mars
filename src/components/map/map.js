@@ -9,7 +9,7 @@ class Map extends Phaser.GameObjects.Container {
     this.character = null;
     this._graph = null;
     this._character = null;
-    this._currentCharLocation = null;
+    // this._currentCharLocation = null;
     this._isCharacterMoving = false;
     this._walkingSpeed = 16;
 
@@ -41,12 +41,15 @@ class Map extends Phaser.GameObjects.Container {
     images.forEach(image => this.addAt(image, -4));
   }
 
-  setActor(sprite, location) {
+  setActorSprite(sprite) {
     this._character && this.remove(this._character)
     this.addAt(sprite, -2);
     this._character = sprite;
+  }
+
+  setActorInLocation(location) {
     this._character.setPosition(...location.walkingPosition);
-    this._currentCharLocation = location;
+    this.scene.registry.set('actor-map-location', location);
   }
 
   _calcWalkingTime(from, to) {
@@ -99,7 +102,8 @@ class Map extends Phaser.GameObjects.Container {
     if (this._isCharacterMoving) return;
 
     this._isCharacterMoving = true;
-    let path = this._pathFinder.find(this._currentCharLocation.name, location.name).reverse();
+    let currentLocation = this.scene.registry.get('actor-map-location');
+    let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
 
     let tween = this.scene.tweens.timeline({
       targets: [this._character],
@@ -108,7 +112,7 @@ class Map extends Phaser.GameObjects.Container {
       tweens: this._buildCharacterTweens(path)
     });
 
-    this._currentCharLocation = location;
+    this.scene.registry.set('actor-map-location', location)
   }
 
 }

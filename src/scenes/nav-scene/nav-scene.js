@@ -65,7 +65,8 @@ class NavScene extends PausableScene {
     map.addLink(stationWaypoint1, antennaLocation);
 
     // Set actor
-    map.setActor(this._createAnimActor(), moduleLocation);
+    map.setActorSprite(this._createAnimActor());
+    map.setActorInLocation(this.registry.get('actor-map-location') || moduleLocation);
   }
 
   _setupCameraBounds(camera, map, padding) {

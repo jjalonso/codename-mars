@@ -1,5 +1,7 @@
 import { PausableScene } from '../../components/scenes/pausable-scene';
+import { Button } from '../../components/ui/button';
 import { LootItem, LootPanel } from '../../components/ui/loot-panel';
+
 
 class StationScene extends PausableScene {
 
@@ -13,7 +15,14 @@ class StationScene extends PausableScene {
     const item2 = new LootItem(this, 0, 0, 'item2');
 
     const itemBox = new LootPanel(this, 0, 0, 100, 3, 2, [item1], [item2]);
+
+    const backBtn = new Button(this, 'Back', 150, this.cameras.main.height - 50, 200, 50, () => {
+      this.fadeOutInStart('nav-scene');
+    });
+
     this.add.existing(itemBox);
+    this.add.existing(backBtn);
+
   }
 
 }
