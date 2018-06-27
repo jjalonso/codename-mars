@@ -22,7 +22,7 @@ class StationScene extends PausableScene {
     });
 
     const helpText = this.add.text(250, this.cameras.main.height - 50, 'checkbox demo');
-    const checkbox = new Checkbox(this, 360, this.cameras.main.height - 45, (value) => { console.log(value) });
+    const checkbox = new Checkbox(this, 400, this.cameras.main.height - 42, (value) => { console.log(value) });
 
     this.add.existing(itemBox);
     this.add.existing(backBtn);
