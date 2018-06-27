@@ -105,7 +105,7 @@ class NavScene extends PausableScene {
   }
 
   update() {
-    // https://github.com/photonstorm/phaser/issues/3776
+    // BUG: https://github.com/photonstorm/phaser/issues/3776
     if (!this.cameras.main) { return }
 
     this._updateScroll()

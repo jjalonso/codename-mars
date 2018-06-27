@@ -3,7 +3,6 @@ import Phaser from 'phaser';
 class LootPanel extends Phaser.GameObjects.Container {
 
   constructor(scene, x, y, cellSize, cols, rows, itemsBox1 = [], itemsBox2 = []) {
-    // TODO: When position x,y is not 0,0 it give problems with grid...
     super(scene, x, y);
     this._cellSize = cellSize;
     this._cols = cols;
@@ -56,6 +55,7 @@ class LootPanel extends Phaser.GameObjects.Container {
 
   _getBoxBounds(box) {
     // TODO: Bug? Im creating one new rectangle because tileSprite.getBounds seems to be returning the image bound only.
+    // https://github.com/photonstorm/phaser/issues/3789
     // return box.getBounds();
     return new Phaser.Geom.Rectangle(box.x, box.y, box.width, box.height);
   }
@@ -69,9 +69,9 @@ class LootPanel extends Phaser.GameObjects.Container {
     this.add([this._box1, this._box2]);
   }
 
-  _isPointInBoxBounds(boxBounds, point) {
-    return Phaser.Geom.Rectangle.ContainsPoint(boxBounds, point);
-  }
+  // _isPointInBoxBounds(boxBounds, point) {
+  //   return Phaser.Geom.Rectangle.ContainsPoint(boxBounds, point);
+  // }
 
   _getItemInPosition(x, y) {
     return [
@@ -85,7 +85,7 @@ class LootPanel extends Phaser.GameObjects.Container {
   _getDroppInPos(point, boxBounds, cellSize) {
     for (var x = boxBounds.x + (cellSize / 2); x <= boxBounds.width + boxBounds.x; x += cellSize) {
       for (var y = boxBounds.y + (cellSize / 2); y <= boxBounds.height + boxBounds.y; y += cellSize) {
-        if (Phaser.Math.Distance.Between(point.x, point.y, x, y) <= 50 && this._getItemInPosition(x, y) === undefined) {
+        if (Phaser.Math.Distance.Between(point.x, point.y, x + this.x, y + this.y) <= 50 && this._getItemInPosition(x, y) === undefined) {
           return [x, y]
         }
       }
@@ -130,8 +130,6 @@ class LootPanel extends Phaser.GameObjects.Container {
     let [x, y] = droppInPos || this._beforeDraggingPos;
     item.setPosition(x, y);
     this._beforeDraggingPos = undefined;
-
-    console.log(this.itemsBox1, this.itemsBox2);
   }
 
   get itemsBox1() {
