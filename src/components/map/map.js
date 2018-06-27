@@ -102,10 +102,16 @@ class Map extends Phaser.GameObjects.Container {
   _walkTo(location) {
     if (this._isCharacterMoving) return;
 
-    this._isCharacterMoving = true;
     let currentLocation = this.scene.registry.get('actor-map-location');
-    let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
 
+    debugger;
+    // Already there?
+    if (location.name === currentLocation.name) { // TODO: check why a full object comparison doesnt work?
+      this._enterNextScene(location);
+    }
+
+    this._isCharacterMoving = true;
+    let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
     let tween = this.scene.tweens.timeline({
       targets: [this._character],
       onComplete: () => this._enterNextScene(location),
