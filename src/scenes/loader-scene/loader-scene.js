@@ -1,6 +1,7 @@
 import { FadeableScene } from '../../components/scenes/fadeable-scene';
 import { ProgressBar } from '../../components/ui/progress-bar';
 
+
 class LoaderScene extends FadeableScene {
 
   constructor() {
@@ -25,6 +26,7 @@ class LoaderScene extends FadeableScene {
     this.load.pack('assets', 'pack.json');
 
     this.load.on('complete', () => {
+      // this.fadeInStart('station-scene'); // Debug
       this.fadeInStart('intro-scene');
     })
 

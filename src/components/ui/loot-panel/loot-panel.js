@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-class LootPanel extends Phaser.GameObjects.Container {
+class Checkbox extends Phaser.GameObjects.Container {
 
   constructor(scene, x, y, cellSize, cols, rows, itemsBox1 = [], itemsBox2 = []) {
     super(scene, x, y);
@@ -142,4 +142,4 @@ class LootPanel extends Phaser.GameObjects.Container {
 
 }
 
-export default LootPanel;
+export default Checkbox;

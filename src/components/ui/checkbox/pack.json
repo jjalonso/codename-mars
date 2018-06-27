@@ -1,0 +1,16 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "ui-box",
+        "url": "ui-box.png",
+        "type": "image"
+      },
+      {
+        "key": "ui-check",
+        "url": "ui-check.png",
+        "type": "image"
+      }
+    ]
+  }
+}

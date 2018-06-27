@@ -13,9 +13,7 @@ class Button extends Phaser.GameObjects.Container {
     const y = -(height / 2);
 
     const text = this.scene.add.text(0, 0, str).setOrigin(0.5);
-    const box = this.scene.add.graphics()
-      .fillStyle(0xffffff, 0.3)
-      .fillRect(x, y, width, height)
+    const box = this.scene.add.image(0, 0, 'ui-button')
       .on('pointerdown', () => cb())
       .setInteractive(
         new Phaser.Geom.Rectangle(x, y, width, height),

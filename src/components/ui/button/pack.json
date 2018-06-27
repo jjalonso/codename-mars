@@ -1,0 +1,11 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "ui-button",
+        "url": "ui-button.png",
+        "type": "image"
+      }
+    ]
+  }
+}
