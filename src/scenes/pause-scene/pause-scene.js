@@ -17,10 +17,10 @@ class PauseScene extends Phaser.Scene {
     const yCenter = cam.height / 2;
 
     this._box = this.add.graphics();
-    this._box.fillStyle(0x222222, 0.5);
+    this._box.fillStyle(0xffffff, 0.6);
     this._box.fillRect(0, 0, cam.width, cam.height);
 
-    const resumeBtn = new Button(this, 'Resume', xCenter, yCenter, 200, 50, () => {
+    const resumeBtn = new Button(this, 'Resume', xCenter, yCenter, () => {
       this.scene.stop(this.scene.key);
       this.scene.resume(this._pausableSceneId)
     });

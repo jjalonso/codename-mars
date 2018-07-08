@@ -32,7 +32,7 @@ class LensScene extends PausableScene {
   }
 
   _buildBackButton(x, y) {
-    const button = new Button(this, 'Leave', x, y, () => {
+    const button = new Button(this, 'LEAVE', x, y, () => {
       this.scene.resume('nav-scene');
       this.scene.stop(this.scene.key)
     }).setDepth(9999);
