@@ -29,7 +29,6 @@ class Checkbox extends Phaser.GameObjects.Container {
   _initBox(box, items) {
     box.setData('items', items);
     this.add(items);
-    this.sendToBack(box);
   }
 
   _sortItems(items, boxBounds, cellSize) {
@@ -50,7 +49,8 @@ class Checkbox extends Phaser.GameObjects.Container {
   }
 
   _buildBox(x, y, width, height) {
-    return this.scene.add.tileSprite(x, y, width, height, 'box-cell').setOrigin(0);
+    return this.scene.add.tileSprite(x, y, width, height, 'box-cell')
+      .setOrigin(0)
   }
 
   _getBoxBounds(box) {
@@ -68,10 +68,6 @@ class Checkbox extends Phaser.GameObjects.Container {
 
     this.add([this._box1, this._box2]);
   }
-
-  // _isPointInBoxBounds(boxBounds, point) {
-  //   return Phaser.Geom.Rectangle.ContainsPoint(boxBounds, point);
-  // }
 
   _getItemInPosition(x, y) {
     return [

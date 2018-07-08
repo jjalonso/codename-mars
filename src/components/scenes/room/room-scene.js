@@ -33,8 +33,6 @@ class RoomScene extends Phaser.Scene {
     this._dialogUIGroup.clear(true, true);
     this._dialogUIGroup.add(this._buildNarrationUI(narration));
 
-    // console.log(narration.actions.map(() => this._buildActionUI(arguments)));
-    // this._dialogUIGroup.addMultiple(narration.actions.map(() => this._buildActionUI(arguments)), true);
     narration.actions.forEach(
       (action, index) => this._dialogUIGroup.add(this._buildActionUI(action, index))
     )

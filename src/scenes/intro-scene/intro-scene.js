@@ -21,6 +21,10 @@ class IntroScene extends FadeableScene {
     });
   };
 
+  create() {
+    var music = this.sound.add('theme');
+    music.play();
+  }
 }
 
 export default IntroScene;

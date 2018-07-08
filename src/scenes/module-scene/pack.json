@@ -1,0 +1,11 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "lens-module-mock",
+        "url": "lens-module-mock.png",
+        "type": "image"
+      }
+    ]
+  }
+}

@@ -9,6 +9,7 @@ class Checkbox extends Phaser.GameObjects.Container {
     this._box = null;
 
     this._create(cb);
+    this._setValue(value);
   }
 
   _setValue(value) {
@@ -17,23 +18,22 @@ class Checkbox extends Phaser.GameObjects.Container {
   }
 
   _create(cb) {
-    // let x = -(width / 2);
-    // const y = -(height / 2);
-
     this._box = this.scene.add.image(0, 0, 'ui-box')
       .on('pointerdown', () => {
-
         this._value = !this._value;
         this._check.setVisible(this._value);
         cb(this._value);
       })
-      .setInteractive(
-        new Phaser.Geom.Rectangle(-5, -5, 26, 26),
-        Phaser.Geom.Rectangle.Contains
-      )
+    this._box.setInteractive(this._createBounds(), Phaser.Geom.Rectangle.Contains);
     this._check = this.scene.add.image(0, 0, 'ui-check')
 
     this.add([this._box, this._check]);
+  }
+
+  _createBounds(padding = 10) {
+    return new Phaser.Geom.Rectangle(-padding, -padding, this._box.width + (padding * 2), this._box.height + (padding * 2))
+    // var bounds = this._box.getBounds()
+    // return Phaser.Geom.Rectangle.Inflate(bounds, padding, padding);
   }
 
   get value() {

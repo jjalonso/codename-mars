@@ -1,0 +1,11 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "theme",
+        "url": "theme.ogg",
+        "type": "audio"
+      }
+    ]
+  }
+}

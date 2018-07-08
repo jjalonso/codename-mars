@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { AntennaScene } from './scenes/antenna-scene';
 import { IntroScene } from './scenes/intro-scene';
 import { LoaderScene } from './scenes/loader-scene';
+import ModuleScene from './scenes/module-scene/module-scene';
 import { NavScene } from './scenes/nav-scene';
 import { PauseScene } from './scenes/pause-scene';
 import { StationScene } from './scenes/station-scene';
@@ -13,7 +14,20 @@ let config = {
   loader: {
     path: 'assets/'
   },
-  scene: [LoaderScene, IntroScene, PauseScene, NavScene, StationScene, AntennaScene]
+  audio: {
+    disableWebAudio: true
+  },
+  scene: [
+    LoaderScene,
+    IntroScene,
+    PauseScene,
+    NavScene,
+
+    // Locations
+    ModuleScene,
+    StationScene,
+    AntennaScene
+  ]
 };
 
 let game = new Phaser.Game(config);

@@ -1,0 +1,11 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "zoom",
+        "url": "zoom.wav",
+        "type": "audio"
+      }
+    ]
+  }
+}

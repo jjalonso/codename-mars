@@ -63,8 +63,12 @@ class Map extends Phaser.GameObjects.Container {
     this._character.anims.stop('walk');
 
     let locationSceneId = location.nextScene;
-    this.scene.fadeOutInStart(locationSceneId)
-    // this.scene.scene.start(locationScene);
+
+    // this.scene.cameras.main.pan(location.x, location.y, 2000, 'Sine.easeInOut');
+
+    this.scene.scene.pause(this.scene.key);
+    this.scene.scene.run(locationSceneId);
+
   }
 
   _onTravelStarted() {
@@ -104,20 +108,19 @@ class Map extends Phaser.GameObjects.Container {
 
     let currentLocation = this.scene.registry.get('actor-map-location');
 
-    debugger;
     // Already there?
     if (location.name === currentLocation.name) { // TODO: check why a full object comparison doesnt work?
       this._enterNextScene(location);
+    } else {
+      this._isCharacterMoving = true;
+      let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
+      let tween = this.scene.tweens.timeline({
+        targets: [this._character],
+        onComplete: () => this._enterNextScene(location),
+        onStart: () => this._onTravelStarted(),
+        tweens: this._buildCharacterTweens(path)
+      });
     }
-
-    this._isCharacterMoving = true;
-    let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
-    let tween = this.scene.tweens.timeline({
-      targets: [this._character],
-      onComplete: () => this._enterNextScene(location),
-      onStart: () => this._onTravelStarted(),
-      tweens: this._buildCharacterTweens(path)
-    });
 
     this.scene.registry.set('actor-map-location', location)
   }

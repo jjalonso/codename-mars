@@ -14,11 +14,11 @@ class FadeableScene extends Phaser.Scene {
     }
   }
 
-  // fadeInRun(sceneId, data, time = this._fadeTime) {
-  //   // TODO: embebed it inside others with flag parameter
-  //   data = Object.assign(data || {}, { fadeInTime: time });
-  //   this.scene.run(sceneId, data);
-  // }
+  fadeInRun(sceneId, data, time = this._fadeTime) {
+    // TODO: embebed it inside others with flag parameter
+    data = Object.assign(data || {}, { fadeInTime: time });
+    this.scene.run(sceneId, data);
+  }
 
   fadeInStart(sceneId, data, time = this._fadeTime) {
     data = Object.assign(data || {}, { fadeInTime: time });
