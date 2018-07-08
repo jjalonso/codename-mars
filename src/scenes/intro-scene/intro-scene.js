@@ -14,7 +14,7 @@ class IntroScene extends FadeableScene {
     const xCenter = camera.width / 2;
     const yCenter = camera.height / 2;
 
-    this._text = this.add.text(xCenter, yCenter, '"Man in Mars"').setOrigin(0.5);
+    this._text = this.add.text(xCenter, yCenter, '"Man in Mars"', { fontSize: 25 }).setOrigin(0.5);
     this._textHelp = this.add.text(xCenter, yCenter + 100, '[PRESS TO CONTINUE]', { fontSize: 12 }).setOrigin(0.5);
 
 
