@@ -18,7 +18,7 @@ class IntroScene extends FadeableScene {
     this._textHelp = this.add.text(xCenter, yCenter + 100, '[PRESS TO CONTINUE]', { fontSize: 12 }).setOrigin(0.5);
 
 
-    this.input.on('pointerdown', () => this._onContinueTriggered());
+    this.input.once('pointerdown', () => this._onContinueTriggered());
   };
 
   _onContinueTriggered() {
