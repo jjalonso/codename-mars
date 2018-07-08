@@ -15,15 +15,19 @@ class IntroScene extends FadeableScene {
     const yCenter = camera.height / 2;
 
     this._text = this.add.text(xCenter, yCenter, '"Man in Mars"').setOrigin(0.5);
+    this._textHelp = this.add.text(xCenter, yCenter + 100, '[PRESS TO CONTINUE]', { fontSize: 12 }).setOrigin(0.5);
+
+
+    this.input.on('pointerdown', () => this._onContinueTriggered());
+  };
+
+  _onContinueTriggered() {
 
     this.time.delayedCall(5000, () => {
       this.fadeOutInStart('nav-scene');
     });
-  };
+    this.sound.add('theme').play();
 
-  create() {
-    var music = this.sound.add('theme');
-    music.play();
   }
 }
 

@@ -31,9 +31,9 @@ class Checkbox extends Phaser.GameObjects.Container {
   }
 
   _createBounds(padding = 10) {
+    // var bounds = this._box.getBounds();
+    // return Phaser.Geom.Rectangle.Inflate(bounds, padding, padding); // TODO: Bug? inflate seems like nothing changed    
     return new Phaser.Geom.Rectangle(-padding, -padding, this._box.width + (padding * 2), this._box.height + (padding * 2))
-    // var bounds = this._box.getBounds()
-    // return Phaser.Geom.Rectangle.Inflate(bounds, padding, padding);
   }
 
   get value() {
