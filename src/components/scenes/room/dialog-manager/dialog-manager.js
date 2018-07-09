@@ -30,7 +30,8 @@ class DialogManager {
 
   executeAction(action) {
     action.executeSetters();
-    action.callback && action.callback();
+    const cb = action.callback;
+    cb && cb();
 
     if (action.next) {
       this._narrationIndex = action.next;
