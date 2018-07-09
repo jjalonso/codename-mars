@@ -3,7 +3,7 @@ import { NarrationFactory } from './narration';
 
 class DialogManager {
 
-  constructor(data, registry) {
+  constructor(scene, data, registry) {
     // dev only
     registry.set('isRadioAnswered', 'false')
     // ---
@@ -12,6 +12,7 @@ class DialogManager {
     this._narration = null;
     this._registry = registry;
     this._data = this._build(data);
+    this._scene = scene;
 
     this._getActiveNarration(this._narrationIndex);
   }
@@ -28,9 +29,17 @@ class DialogManager {
   }
 
   executeAction(action) {
-    action.executeSet();
-    this._narrationIndex = action.next;
-    this._getActiveNarration(this._narrationIndex);
+    action.executeSetters();
+    action.callback && action.callback();
+
+    if (action.next) {
+      this._narrationIndex = action.next;
+      this._getActiveNarration(this._narrationIndex);
+    }
+  }
+
+  get scene() {
+    return this._scene;
   }
 
   get registry() {

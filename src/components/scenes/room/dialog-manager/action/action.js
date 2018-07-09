@@ -16,11 +16,16 @@ class Action {
     return conditions.every(condition => registry.get(condition.flag) == condition.value);
   }
 
+  get callback() {
+    const scene = this._dialogManager.scene;
+    return scene[this._data.callback].bind(scene); // ??? was executed before with action context
+  }
+
   get next() {
     return this._data.next;
   }
 
-  executeSet() {
+  executeSetters() {
     let registry = this._dialogManager.registry;
     this._data.set.forEach(set => registry.set(set.flag, set.value));
   }

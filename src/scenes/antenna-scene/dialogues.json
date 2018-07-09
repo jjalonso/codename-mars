@@ -1,7 +1,7 @@
 {
   "0": [
     {
-      "display": "*radio interferences*\n\n- Captain Moore? Here earth station trying to stablish connection...",
+      "display": "*radio interferences*\n\nLook like after the explosion a small hole have been opened on the floor of the room,\na strong smell is coming from there...",
       "conditions": [
         {
           "flag": "isRadioAnswered",
@@ -21,15 +21,15 @@
           ]
         },
         {
-          "display": "Fill oxygen tank",
+          "display": "Enter in the hole",
           "conditions": [],
-          "next": "2",
+          "callback": "goUnderground",
           "set": []
         }
       ]
     },
     {
-      "display": "The antenna station is quiet, thats not normal, I think the radio just get broken...",
+      "display": "The antenna station is quiet, thats not normal, I think the radio just got broken...",
       "conditions": [
         {
           "flag": "isRadioAnswered",
@@ -52,13 +52,6 @@
           "set": []
         }
       ]
-    }
-  ],
-  "2": [
-    {
-      "display": "The oxygen tanks are full now",
-      "conditions": [],
-      "actions": []
     }
   ]
 }

@@ -79,6 +79,7 @@ class Checkbox extends Phaser.GameObjects.Container {
   }
 
   _getDroppInPos(point, boxBounds, cellSize) {
+    // TODO: Use Phaser.Math.Snap ?
     for (var x = boxBounds.x + (cellSize / 2); x <= boxBounds.width + boxBounds.x; x += cellSize) {
       for (var y = boxBounds.y + (cellSize / 2); y <= boxBounds.height + boxBounds.y; y += cellSize) {
         if (Phaser.Math.Distance.Between(point.x, point.y, x + this.x, y + this.y) <= 50 && this._getItemInPosition(x, y) === undefined) {

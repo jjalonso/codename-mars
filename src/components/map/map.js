@@ -6,14 +6,16 @@ class Map extends Phaser.GameObjects.Container {
 
   constructor(scene, images, x, y, children) {
     super(scene, x, y, children);
+
     this.character = null;
     this._graph = null;
     this._character = null;
-    // this._currentCharLocation = null;
+    this._locationsFrontIndex = 300;
+    this._locationsBackIndex = 100;
     this._isCharacterMoving = false;
     this._walkingSpeed = 16;
 
-    this._setImages(images);
+    this._setMapTiles(images);
     this._initGraph();
   }
 
@@ -24,8 +26,14 @@ class Map extends Phaser.GameObjects.Container {
 
   add(child, isOverActor = true) {
     if (child instanceof Phaser.GameObjects.GameObject) {
-      let index = isOverActor ? -3 : -1;
-      this.addAt(child, index);
+      if (isOverActor) {
+        // Locations over actor index range: 300+
+        this.addAt(child, this._locationsFrontIndex++);
+      } else {
+        // Locations under actor index, range 100-199
+        if (this._locationsBackIndex > 199) throw "Only 99 under actor locations is supported";
+        this.addAt(child, this._locationsBackIndex++);
+      }
     }
     this._graph.addNode(child.name, child);
   }
@@ -37,13 +45,16 @@ class Map extends Phaser.GameObjects.Container {
     this._graph.addLink(from.name, to.name);
   }
 
-  _setImages(images) {
-    images.forEach(image => this.addAt(image, -4));
+  _setMapTiles(images) {
+    // Map images index 0-99
+    if (images.length > 99) throw "Only 99 map tiles is supported";
+    images.forEach((image, index) => this.addAt(image, index));
   }
 
   setActorSprite(sprite) {
+    // Actor index, 100-199
     this._character && this.remove(this._character)
-    this.addAt(sprite, -2);
+    this.addAt(sprite, 100);
     this._character = sprite;
   }
 
@@ -59,16 +70,11 @@ class Map extends Phaser.GameObjects.Container {
   }
 
   _enterNextScene(location) {
-    this._isCharacterMoving = false;
-    this._character.anims.stop('walk');
-
     let locationSceneId = location.nextScene;
-
-    // this.scene.cameras.main.pan(location.x, location.y, 2000, 'Sine.easeInOut');
-
-    this.scene.scene.pause(this.scene.key);
-    this.scene.scene.run(locationSceneId);
-
+    this._character.anims.stop('walk');
+    this._isCharacterMoving = false;
+    this.scene.scene.run(locationSceneId, { mapSceneId: this.scene.scene.key });
+    this.scene.scene.pause(this.scene.scene.key);
   }
 
   _onTravelStarted() {
@@ -106,7 +112,7 @@ class Map extends Phaser.GameObjects.Container {
   _walkTo(location) {
     if (this._isCharacterMoving) return;
 
-    let currentLocation = this.scene.registry.get('actor-map-location');
+    let currentLocation = this.scene.registry.get('actor-map-location'); // TODO: This should have different ID depend of map
 
     // Already there?
     if (location.name === currentLocation.name) { // TODO: check why a full object comparison doesnt work?
@@ -114,7 +120,7 @@ class Map extends Phaser.GameObjects.Container {
     } else {
       this._isCharacterMoving = true;
       let path = this._pathFinder.find(currentLocation.name, location.name).reverse();
-      let tween = this.scene.tweens.timeline({
+      this.scene.tweens.timeline({
         targets: [this._character],
         onComplete: () => this._enterNextScene(location),
         onStart: () => this._onTravelStarted(),

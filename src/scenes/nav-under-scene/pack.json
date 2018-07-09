@@ -1,0 +1,20 @@
+{
+  "boot": {
+    "files": [
+      {
+        "key": "map-actor",
+        "url": "map-actor.png",
+        "type": "spritesheet",
+        "frameConfig": {
+          "frameWidth": 8,
+          "frameHeight": 16
+        }
+      },
+      {
+        "key": "terrain-under",
+        "url": "terrain-under.png",
+        "type": "image"
+      }
+    ]
+  }
+}

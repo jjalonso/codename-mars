@@ -61,11 +61,6 @@
         "type": "image"
       },
       {
-        "key": "terrain",
-        "url": "terrain.png",
-        "type": "image"
-      },
-      {
         "key": "antenna",
         "url": "antenna.png",
         "type": "image"

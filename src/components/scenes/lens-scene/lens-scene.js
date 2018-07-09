@@ -5,9 +5,15 @@ class LensScene extends PausableScene {
 
   constructor(sceneId, pauseSceneId) {
     super(sceneId, pauseSceneId);
+    this._mapSceneId = null;
     this._xLens = null;
     this._yLens = null;
     this._radioLens = null;
+  }
+
+  init(data) {
+    super.init(data);
+    this._mapSceneId = data.mapSceneId;
   }
 
   create() {
@@ -33,7 +39,7 @@ class LensScene extends PausableScene {
 
   _buildBackButton(x, y) {
     const button = new Button(this, 'LEAVE', x, y, () => {
-      this.scene.resume('nav-scene');
+      this.scene.resume(this._mapSceneId);
       this.scene.stop(this.scene.key)
     }).setDepth(9999);
     this.add.existing(button);

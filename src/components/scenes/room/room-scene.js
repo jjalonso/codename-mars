@@ -1,21 +1,19 @@
+import { PausableScene } from '../pausable-scene';
 import { DialogManager } from './dialog-manager';
 
-class RoomScene extends Phaser.Scene {
+class RoomScene extends PausableScene {
 
-  constructor(name, dialogData) {
-    super(name);
+  constructor(name, pauseSceneId, dialogData) {
+    super(name, pauseSceneId);
     this._dialogData = dialogData;
     this._dialogManager = null;
     this._textGroup = null;
 
   }
 
-  preload() {
-  }
-
   create() {
     this._dialogUIGroup = this.add.group();
-    this._dialogManager = new DialogManager(this._dialogData, this.registry);
+    this._dialogManager = new DialogManager(this, this._dialogData, this.registry);
 
     let narration = this._dialogManager.narration;
     this._buildDialogUI(narration);

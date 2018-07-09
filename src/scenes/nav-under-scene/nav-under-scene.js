@@ -1,10 +1,10 @@
-import { Map, MapLocation, MapWaypoint } from '../../components/map';
+import { Map, MapLocation } from '../../components/map';
 import { PausableScene } from '../../components/scenes/pausable-scene';
 
-class NavScene extends PausableScene {
+class NavUnderScene extends PausableScene {
 
   constructor() {
-    super('nav-scene', 'pause-scene');
+    super('nav-under-scene', 'pause-scene');
     this._scrollMarginPercent = 0.05;
     this._map = null;
   }
@@ -13,14 +13,12 @@ class NavScene extends PausableScene {
     const camera = this.cameras.main;
 
     let imagesMap = this._buildImagesMap([
-      'terrain-01', 'terrain-02', 'terrain-03',
-      'terrain-04', 'terrain-05', 'terrain-06',
-      'terrain-07', 'terrain-08', 'terrain-09'
-    ], 617, 351, 3);
+      'terrain-under',
+    ], 925, 537, 1);
 
     this._map = new Map(this, imagesMap, 0, 0);
     this._buildMapLocations(this._map);
-    this._setupCameraBounds(camera, this._map, 150);
+    this._setupCameraBounds(camera, this._map, 50);
     this.add.existing(this._map);
   }
 
@@ -37,36 +35,18 @@ class NavScene extends PausableScene {
 
   _buildMapLocations(map) {
     // Map locations
-    let moduleLocation = new MapLocation(map, 320, 420, 'module-scene', 300, 400, 'module');
-    let stationLocation = new MapLocation(map, 790, 670, 'station-scene', 850, 650, 'station');
-    let antennaLocation = new MapLocation(map, 1125, 450, 'antenna-scene', 1145, 460, 'antenna').setScale(0.3);
+    let antennaLocation = new MapLocation(map, 250, 100, 'station-scene', 265, 120, 'antenna').setScale(0.5);
 
     // Map waypoints
-    let moduleWaypoint1 = new MapWaypoint(528, 580);
-    let moduleWaypoint2 = new MapWaypoint(625, 605);
-    let moduleWaypoint3 = new MapWaypoint(675, 655);
-    let stationWaypoint1 = new MapWaypoint(925, 608);
 
     // Add them
-    map.add(moduleLocation);
-    map.add(stationLocation, false);
     map.add(antennaLocation);
-    map.add(moduleWaypoint1);
-    map.add(moduleWaypoint2);
-    map.add(moduleWaypoint3);
-    map.add(stationWaypoint1);
 
     // Add links
-    map.addLink(moduleLocation, moduleWaypoint1);
-    map.addLink(moduleWaypoint1, moduleWaypoint2);
-    map.addLink(moduleWaypoint2, moduleWaypoint3);
-    map.addLink(moduleWaypoint3, stationLocation);
-    map.addLink(moduleWaypoint3, stationWaypoint1);
-    map.addLink(stationWaypoint1, antennaLocation);
 
     // Set actor
     map.setActorSprite(this._createAnimActor());
-    map.setActorInLocation(this.registry.get('actor-map-location') || moduleLocation);
+    map.setActorInLocation(antennaLocation);
   }
 
   _setupCameraBounds(camera, map, padding) {
@@ -80,6 +60,7 @@ class NavScene extends PausableScene {
   }
 
   _buildImagesMap(images, width, height, rowWidth) {
+    // clean
     return images.map((imageId, index) => {
       let x = (index % rowWidth) * width;
       let y = Math.floor(index / (rowWidth)) * height;
@@ -115,4 +96,4 @@ class NavScene extends PausableScene {
 
 }
 
-export default NavScene;
+export default NavUnderScene;
